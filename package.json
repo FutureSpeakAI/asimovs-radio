@@ -1,0 +1,29 @@
+{
+  "name": "@asimovs-mind/radio",
+  "version": "1.0.0",
+  "description": "Asimov's Radio — emotional arc orchestration through music. Standalone MCP server for session-aware musical context injection.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test test/test-radio.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.25 || ^4.0"
+  },
+  "author": "FutureSpeak.AI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FutureSpeakAI/asimovs-radio.git"
+  },
+  "keywords": [
+    "mcp",
+    "music",
+    "emotional-arc",
+    "agent-context",
+    "asimov",
+    "claude-code"
+  ]
+}
