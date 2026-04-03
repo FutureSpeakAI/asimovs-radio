@@ -1,9 +1,19 @@
 {
-  "name": "@asimovs-mind/radio",
+  "name": "asimovs-radio",
   "version": "1.0.0",
   "description": "Asimov's Radio — emotional arc orchestration through music. Standalone MCP server for session-aware musical context injection.",
   "type": "module",
   "main": "index.js",
+  "bin": {
+    "asimovs-radio": "./bin/asimovs-radio.js"
+  },
+  "files": [
+    "index.js",
+    "bin/",
+    "lib/",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "start": "node index.js",
     "test": "node --test test/test-radio.js"
@@ -20,6 +30,7 @@
   },
   "keywords": [
     "mcp",
+    "mcp-server",
     "music",
     "emotional-arc",
     "agent-context",
