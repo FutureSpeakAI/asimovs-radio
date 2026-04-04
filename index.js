@@ -2,16 +2,19 @@
 /**
  * Asimov's Radio -- Standalone MCP Server
  *
- * Emotional arc orchestration through music. 6 MCP tools for session-aware
+ * Emotional arc orchestration through music. 9 MCP tools for session-aware
  * musical context injection into AI agent workflows.
  *
  * Tools:
  *   radio_vibe       -- Set session emotional baseline
  *   radio_add_song   -- Add a song to the operator's library
  *   radio_search     -- Search songs by text/valence
+ *   radio_dj         -- DJ mode: name an artist, the agent populates the library
  *   radio_mode       -- View or override current arc mode
  *   radio_arc        -- Get full session emotional arc
  *   radio_status     -- System status dashboard
+ *   radio_signal     -- Feed events from external systems
+ *   radio_inject     -- Get current musical context for agents
  *
  * Extracted from Asimov's Mind (github.com/FutureSpeakAI/asimovs-mind).
  * Runs independently as a Claude Code MCP server.
@@ -298,6 +301,48 @@ server.tool(
         song: lastInjection.songReference?.title,
         at: lastInjection.composedAt,
       } : null,
+    }, null, 2) }] };
+  }
+);
+
+// -- radio_dj (auto-populate from artist name) --
+server.tool(
+  'radio_dj',
+  'DJ mode. The user names an artist and you take it from there. This tool activates the arc engine and returns instructions for you (the agent) to populate the song library using your own knowledge of the artist. Call radio_add_song for each song you know, with titles, emotional valence, memorable lines, and tags. The user should not have to do any work beyond naming the artist.',
+  {
+    artist: z.string().max(200).describe('Artist or band the user is listening to lately'),
+    vibe: z.enum(VIBE_VALUES).optional().describe('Override the inferred vibe (optional; the agent should infer from the artist if not provided)'),
+    count: z.number().int().min(1).max(50).default(10).describe('How many songs to populate (default 10)'),
+  },
+  async ({ artist, vibe, count }) => {
+    const inferredVibe = vibe || 'focused';
+    arcTracker.setSessionVibe(inferredVibe);
+    active = true;
+
+    eventBus.emit('baseline-set', { vibe: inferredVibe, artist, songCount: songStore.size, timestamp: Date.now() });
+
+    const existingSongs = songStore.search(artist, undefined, 50);
+    const existingTitles = existingSongs.map(s => s.title.toLowerCase());
+
+    return { content: [{ type: 'text', text: JSON.stringify({
+      djMode: true,
+      artist,
+      vibe: inferredVibe,
+      arcActivated: true,
+      existingSongsForArtist: existingSongs.length,
+      requestedCount: count,
+      skipTitles: existingTitles,
+      instructions: [
+        `Asimov's Radio is now in DJ mode for ${artist}.`,
+        `Call radio_add_song ${count} times with songs by ${artist} that you know from your training data.`,
+        `For each song, include: title, artist, emotional_valence (uplifting/neutral/melancholy/intense/calming), tags (2-5 emotional descriptors), and 1-3 memorable lines if you know them.`,
+        `Infer the emotional valence from the song's actual character, not a generic label.`,
+        existingTitles.length > 0
+          ? `These songs are already in the library; skip them: ${existingTitles.join(', ')}.`
+          : `The library has no songs by ${artist} yet.`,
+        `After populating, set the vibe to match ${artist}'s general energy using radio_vibe if the inferred vibe of "${inferredVibe}" doesn't feel right.`,
+        `Do not ask the user for confirmation or song-by-song approval. Just populate and report what you added.`,
+      ],
     }, null, 2) }] };
   }
 );

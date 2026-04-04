@@ -45,7 +45,7 @@ One line:
 claude mcp add --transport stdio -s user asimovs-radio -- npx -y asimovs-radio
 ```
 
-Restart Claude Code. Eight new `radio_*` tools appear. You're on the air.
+Restart Claude Code. Nine new `radio_*` tools appear. You're on the air.
 
 ### From source
 
@@ -70,12 +70,26 @@ Every session runs through an emotional arc with three modes, one state machine,
 
 Transitions are automatic. You can override with `radio_mode`, but the whole point is that you shouldn't have to.
 
-## Your Library, Your Rules
+## DJ Mode
 
 > *"Take a sad song and make it better."*
 > -- The Beatles, "Hey Jude"
 
-Every song in the system is one you put there: title, artist, a few favorite lines, some emotional tags.
+The fastest way to get started is to just name an artist.
+
+```
+radio_dj
+  artist: "The Beatles"
+  count: 15
+```
+
+That's it. The agent takes over from there, populating your library with songs it knows by that artist, complete with emotional valence tags, memorable lines, and descriptors. You don't pick songs, you don't tag anything, you don't approve each entry. You name the artist and the radio starts playing.
+
+DJ mode activates the arc engine automatically; you can always refine later with `radio_add_song` if you want to add specific tracks or adjust tags the agent got wrong.
+
+## Your Library, Your Rules
+
+If you prefer to curate manually, every song in the system can be one you put there yourself: title, artist, a few favorite lines, some emotional tags.
 
 ```
 radio_add_song
@@ -92,6 +106,7 @@ Songs are tagged with **valence** (uplifting, neutral, melancholy, intense, calm
 
 | Tool | What it does |
 |------|-------------|
+| `radio_dj` | DJ mode. Name an artist; the agent populates your library automatically. |
 | `radio_vibe` | Set the session vibe. This is the starting gun for the arc engine. |
 | `radio_add_song` | Add a song to your library with title, artist, lines, chords, tags, and valence. |
 | `radio_search` | Find songs by text, artist, tags, or valence. |
