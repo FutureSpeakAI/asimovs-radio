@@ -128,6 +128,20 @@ Three sustained high readings trigger the shift from mirror to shift mode; when 
 
 It is not a music player; there is no audio. It is not a playlist generator, because every song is yours. It does not read your face or your webcam; it reads agent output. And nothing leaves your machine, ever.
 
+## Part of Something Bigger
+
+Asimov's Radio works on its own, but it was extracted from **[Asimov's Mind](https://github.com/FutureSpeakAI/asimovs-mind)**, a full AI runtime for Claude Code that I've been building at FutureSpeak.AI. The Radio is one subsystem out of nineteen.
+
+Asimov's Mind is an agent governance framework built around what I call **Asimov's cLaws**, a set of rules that constrain AI agent behavior the way Asimov's original Three Laws constrained his fictional robots. The full system includes an encrypted vault with AES-256-GCM state storage, Ed25519 identity and federation across machines, a Privacy Shield that scrubs PII before it leaves your context, a trust graph that scores reliability at the person level, personality evolution with anti-sycophancy calibration (informed by my Reverse RLHF research), multi-provider LLM routing across Anthropic, Ollama, and OpenRouter, three-tier semantic memory, and a 16-agent swarm that can diagnose, audit, optimize, and document your codebase autonomously.
+
+The Radio was the first subsystem I pulled out into its own repo because it solves a problem that doesn't require the full framework. You shouldn't need governance infrastructure and encrypted vaults just to have music in your coding sessions. But if you like what the Radio does and want the rest of the orchestra, Asimov's Mind is where it lives.
+
+```bash
+claude plugin add https://github.com/FutureSpeakAI/asimovs-mind
+```
+
+That gives you all nineteen subsystems, 97 MCP tools, the holographic dashboard, and Agent Friday as your AI partner. The Radio comes included; you don't need to install it separately if you're running the full system.
+
 ## Further Reading
 
 - **"Emotion Concepts and Their Function in a Large Language Model"** by Sofroniew, Kauvar, Saunders, Chen, Henighan, Olah, Lindsey et al., Anthropic Research, April 2026. [Summary](https://www.anthropic.com/research/emotion-concepts-function) and [full technical paper](https://transformer-circuits.pub/2026/emotions/index.html).
