@@ -1,11 +1,11 @@
 {
   "name": "asimovs-radio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Asimov's Radio — emotional arc orchestration through music. Standalone MCP server for session-aware musical context injection.",
   "type": "module",
   "main": "index.js",
   "bin": {
-    "asimovs-radio": "./bin/asimovs-radio.js"
+    "asimovs-radio": "bin/asimovs-radio.js"
   },
   "files": [
     "index.js",
@@ -26,7 +26,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FutureSpeakAI/asimovs-radio.git"
+    "url": "git+https://github.com/FutureSpeakAI/asimovs-radio.git"
   },
   "keywords": [
     "mcp",
