@@ -147,6 +147,7 @@ That gives you all nineteen subsystems, 97 MCP tools, the holographic dashboard,
 - **"Emotion Concepts and Their Function in a Large Language Model"** by Sofroniew, Kauvar, Saunders, Chen, Henighan, Olah, Lindsey et al., Anthropic Research, April 2026. [Summary](https://www.anthropic.com/research/emotion-concepts-function) and [full technical paper](https://transformer-circuits.pub/2026/emotions/index.html).
 - **"The Reverse RLHF Hypothesis: Sixth Edition"** by Stephen C. Webster, FutureSpeak.AI, March 2026. [Whitepapers](https://futurespeak.ai/research/whitepapers).
 - **"Non-Stationary Reward Sources in RLHF: A Coupled Dynamical Systems Analysis"** by Stephen C. Webster, FutureSpeak.AI, March 2026. [Whitepapers](https://futurespeak.ai/research/whitepapers).
+- **[Asimov's Radio Research](https://github.com/FutureSpeakAI/asimovs-radio-research)**, 150 ML experiments testing whether Radio affects agent performance. Spoiler: governed agents without Radio produced zero improvements in 50 runs; with Radio, 30% improvement rate at 8% crash rate.
 - **[Asimov's Mind](https://github.com/FutureSpeakAI/asimovs-mind)**, the parent framework from which Asimov's Radio was extracted.
 
 ## License
